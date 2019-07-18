@@ -1,0 +1,35 @@
+<html>
+   <body>
+      <button type="button" name="" id="process">Submit</button>
+      <div id="result"></div>
+   </body>
+</html>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$('#process').click(function(e){
+		e.preventDefault();
+		var data = "uploading file";
+		$.ajax({
+			url:'http://127.0.0.1:8080/api/v1/print',
+			type:'POST',	
+			data:{data:data},
+			success:function(result){
+				console.log("status "+result.response.status);
+				if (result.response.status == 2) {
+					window.location.href = 'index.html';
+				}
+				else if (result.response.status == 3) {
+					window.location.href = 'index2.html';
+				} 
+				else {
+					window.location.href = 'indexformal.html';
+				}
+
+			},
+			eror:function(err){
+				alert(err);
+			}
+		});
+	});
+</script>
